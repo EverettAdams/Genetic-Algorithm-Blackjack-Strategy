@@ -8,7 +8,7 @@ import genetic_algorithm as ga
 
 
 # Adjustable Test Parameters
-N = 100000 #Number of turns
+N = 1000 #Number of turns
 BA = 1 #Amount of cash bet each round ($)
 Initial_Cash = 100000 #Starting amout of cash for the player ($)
 
@@ -20,12 +20,14 @@ Initial_Cash = 100000 #Starting amout of cash for the player ($)
 basic_strategy_hard = pd.read_excel(
     io = 'Basic Strategy.xlsx',
     sheet_name = 'Hard',
-    index_col = 0)
+    index_col = 0,
+    engine='openpyxl')
 #Soft Count Strategy
 basic_strategy_soft = pd.read_excel(
     io = 'Basic Strategy.xlsx',
     sheet_name = 'Soft',
-    index_col = 0)
+    index_col = 0,
+    engine='openpyxl')
 #Total Strategy
 basic_strategy = [basic_strategy_hard, basic_strategy_soft]
 
@@ -34,12 +36,14 @@ basic_strategy = [basic_strategy_hard, basic_strategy_soft]
 genetic_strategy_hard = pd.read_excel(
     io = 'Genetic Algorithm Strategy.xlsx',
     sheet_name = 'Hard',
-    index_col = 0)
+    index_col = 0,
+    engine='openpyxl')
 #Soft Count Strategy
 genetic_strategy_soft = pd.read_excel(
     io = 'Genetic Algorithm Strategy.xlsx',
     sheet_name = 'Soft',
-    index_col = 0)
+    index_col = 0,
+    engine='openpyxl')
 #Total Strategy
 genetic_strategy = [genetic_strategy_hard, genetic_strategy_soft]
 
@@ -76,7 +80,7 @@ for strategy_name, strategy in strategy_dict.items():
 
         #Refill Shoe when number of cards in shoe is low (below 50)
         if len(game_shoe.cards) < 50:
-            shoe_add = Shoe(8)
+            shoe_add = bj.Shoe(8)
             shoe_add.shuffle()
             game_shoe.cards = np.append(game_shoe.cards,shoe_add.cards)
 
